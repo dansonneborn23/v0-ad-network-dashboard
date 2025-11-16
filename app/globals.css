@@ -4,58 +4,60 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.16 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0 0);
+  /* Updated to use brand colors: White background, Black text, Fluency Red primary, Green Pop accent */
+  --background: oklch(1 0 0); /* White #FFFFFF */
+  --foreground: oklch(0 0 0); /* Black #000000 */
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0 0);
-  --primary: oklch(0.45 0.2 255);
-  --primary-foreground: oklch(0.98 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.56 0.24 13); /* Fluency Red #F82D52 */
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.92 0.01 250);
-  --secondary-foreground: oklch(0.16 0 0);
+  --secondary-foreground: oklch(0 0 0);
   --muted: oklch(0.94 0.01 250);
   --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.55 0.18 145);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
+  --accent: oklch(0.73 0.19 145); /* Green Pop #23C967 */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.56 0.24 13); /* Fluency Red */
+  --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.88 0.01 250);
   --input: oklch(0.88 0.01 250);
-  --ring: oklch(0.45 0.2 255);
-  --chart-1: oklch(0.45 0.2 255);
-  --chart-2: oklch(0.55 0.18 145);
-  --chart-3: oklch(0.65 0.22 30);
-  --chart-4: oklch(0.6 0.15 285);
-  --chart-5: oklch(0.7 0.18 180);
+  --ring: oklch(0.56 0.24 13);
+  --chart-1: oklch(0.56 0.24 13); /* Fluency Red */
+  --chart-2: oklch(0.73 0.19 145); /* Green Pop */
+  --chart-3: oklch(0.84 0.14 85); /* Yellow Pop #FFD243 */
+  --chart-4: oklch(0.2 0.02 250); /* NG Cool 850 #212539 */
+  --chart-5: oklch(0.56 0.24 13); /* Fluency Red variant */
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.96 0 0);
+  /* Updated dark mode to use NG Cool 850 as background with complementary brand colors */
+  --background: oklch(0.2 0.02 250); /* NG Cool 850 #212539 */
+  --foreground: oklch(0.96 0 0); /* White */
   --card: oklch(0.16 0 0);
   --card-foreground: oklch(0.96 0 0);
   --popover: oklch(0.16 0 0);
   --popover-foreground: oklch(0.96 0 0);
-  --primary: oklch(0.55 0.22 255);
-  --primary-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.56 0.24 13); /* Fluency Red */
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.2 0.01 250);
   --secondary-foreground: oklch(0.96 0 0);
   --muted: oklch(0.2 0.01 250);
   --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.6 0.2 145);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.5 0.2 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --accent: oklch(0.73 0.19 145); /* Green Pop */
+  --accent-foreground: oklch(0 0 0);
+  --destructive: oklch(0.56 0.24 13); /* Fluency Red */
+  --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.24 0.01 250);
   --input: oklch(0.24 0.01 250);
-  --ring: oklch(0.55 0.22 255);
-  --chart-1: oklch(0.55 0.22 255);
-  --chart-2: oklch(0.6 0.2 145);
-  --chart-3: oklch(0.7 0.25 30);
-  --chart-4: oklch(0.65 0.18 285);
-  --chart-5: oklch(0.75 0.2 180);
+  --ring: oklch(0.56 0.24 13);
+  --chart-1: oklch(0.56 0.24 13); /* Fluency Red */
+  --chart-2: oklch(0.73 0.19 145); /* Green Pop */
+  --chart-3: oklch(0.84 0.14 85); /* Yellow Pop */
+  --chart-4: oklch(0.96 0 0); /* White */
+  --chart-5: oklch(0.56 0.24 13); /* Fluency Red variant */
 }
 
 @theme inline {
