@@ -2,9 +2,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { TrendingUp, Users, Target, BarChart3 } from 'lucide-react'
+import { Users, Target, BarChart3, AlertTriangle, Shield } from 'lucide-react'
 
 const performanceData = [
   { month: "Jan", impressions: 2100000, clicks: 63000, conversions: 1260 },
@@ -16,10 +16,25 @@ const performanceData = [
 ]
 
 const inventoryData = [
-  { type: "Search", count: 127, percentage: 55 },
-  { type: "Display", count: 68, percentage: 30 },
-  { type: "Shopping", count: 23, percentage: 10 },
-  { type: "Native", count: 12, percentage: 5 },
+  { type: "PMax", count: 148, percentage: 45 },
+  { type: "Search", count: 92, percentage: 28 },
+  { type: "Shopping", count: 56, percentage: 17 },
+  { type: "Display", count: 34, percentage: 10 },
+]
+
+const riskData = [
+  { 
+    risk: "Extensive PMax campaigns in use", 
+    severity: "High",
+    description: "Performance Max campaigns require specialized handling and may have limited manual optimization capabilities",
+    mitigation: "Develop dedicated PMax integration workflow with automated reporting and performance tracking"
+  },
+  { 
+    risk: "Inactive Accounts and Campaigns", 
+    severity: "Medium",
+    description: "Multiple inactive accounts and campaigns detected that may impact reporting accuracy and create data inconsistencies",
+    mitigation: "Implement automated filtering for inactive entities and establish clear archival processes"
+  },
 ]
 
 export function MicrosoftDashboard() {
@@ -40,8 +55,37 @@ export function MicrosoftDashboard() {
         </Badge>
       </div>
 
+      {/* Fluency Compatibility Score */}
+      <Card className="border-2 border-chart-3/50 bg-gradient-to-br from-chart-3/10 to-transparent">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-lg font-medium text-muted-foreground">
+                Fluency Compatibility Score
+              </CardTitle>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Overall integration readiness and data quality
+              </p>
+            </div>
+            <Shield className="size-8 text-chart-3" />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-end gap-2">
+            <div className="text-6xl font-bold text-foreground">78</div>
+            <div className="mb-2 text-2xl text-muted-foreground">/100</div>
+          </div>
+          <div className="mt-4 h-3 overflow-hidden rounded-full bg-secondary">
+            <div className="h-full bg-gradient-to-r from-chart-3 to-chart-4" style={{ width: '78%' }} />
+          </div>
+          <p className="mt-3 text-sm text-chart-3">
+            Good compatibility - Some documentation gaps to address
+          </p>
+        </CardContent>
+      </Card>
+
       {/* Key Metrics */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card className="bg-card">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -86,66 +130,62 @@ export function MicrosoftDashboard() {
             </p>
           </CardContent>
         </Card>
-
-        <Card className="bg-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total Spend
-            </CardTitle>
-            <TrendingUp className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-foreground">$186.3K</div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              <span className="text-accent">+15%</span> from last month
-            </p>
-          </CardContent>
-        </Card>
       </div>
 
-      {/* Performance Chart */}
+      {/* Implementation Risks */}
       <Card className="bg-card">
         <CardHeader>
-          <CardTitle className="text-foreground">Performance Trends</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <AlertTriangle className="size-5 text-chart-3" />
+            Implementation Risks
+          </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Impressions, clicks, and conversions over time
+            Potential challenges and recommended mitigation strategies
           </p>
         </CardHeader>
         <CardContent>
-          <ChartContainer
-            config={{
-              impressions: {
-                label: "Impressions",
-                color: "hsl(var(--chart-3))",
-              },
-              clicks: {
-                label: "Clicks",
-                color: "hsl(var(--chart-4))",
-              },
-            }}
-            className="h-[300px]"
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={performanceData}>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-                <XAxis dataKey="month" className="text-xs" />
-                <YAxis className="text-xs" />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Line
-                  type="monotone"
-                  dataKey="impressions"
-                  stroke="var(--color-chart-3)"
-                  strokeWidth={2}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="clicks"
-                  stroke="var(--color-chart-4)"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </ChartContainer>
+          <div className="space-y-4">
+            {riskData.map((risk, index) => (
+              <div
+                key={index}
+                className="rounded-lg border border-border bg-card/50 p-4"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <h4 className="font-semibold text-foreground">{risk.risk}</h4>
+                      <Badge
+                        variant={
+                          risk.severity === "High"
+                            ? "destructive"
+                            : risk.severity === "Medium"
+                            ? "default"
+                            : "secondary"
+                        }
+                        className={
+                          risk.severity === "High"
+                            ? "bg-primary text-primary-foreground"
+                            : risk.severity === "Medium"
+                            ? "bg-chart-3 text-foreground"
+                            : "bg-accent text-foreground"
+                        }
+                      >
+                        {risk.severity}
+                      </Badge>
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {risk.description}
+                    </p>
+                    <div className="mt-3 rounded bg-chart-3/10 p-2">
+                      <p className="text-xs font-medium text-chart-3">
+                        Mitigation: {risk.mitigation}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
 

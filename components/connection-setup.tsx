@@ -41,8 +41,12 @@ export function ConnectionSetup() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <CardHeader className="relative">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex size-16 items-center justify-center rounded-xl bg-primary/10 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/40">
-                <span className="text-3xl font-black text-primary">M</span>
+              <div className="flex size-24 items-center justify-center rounded-xl bg-primary/10 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/40 overflow-hidden">
+                <img 
+                  src="/meta-logo-abstract.png" 
+                  alt="Meta"
+                  className="w-full h-full object-cover"
+                />
               </div>
               {connectedNetworks.has('meta') ? (
                 <Badge className="gap-1 bg-accent/20 border-accent text-accent hover:bg-accent/30 animate-pulse-slow">
@@ -81,8 +85,12 @@ export function ConnectionSetup() {
           <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <CardHeader className="relative">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex size-16 items-center justify-center rounded-xl bg-accent/10 border-2 border-accent/30 group-hover:border-accent/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/40">
-                <span className="text-3xl font-black text-accent">G</span>
+              <div className="flex size-24 items-center justify-center rounded-xl bg-accent/10 border-2 border-accent/30 group-hover:border-accent/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-accent/40 overflow-hidden">
+                <img 
+                  src="/google-ads-logo.png" 
+                  alt="Google"
+                  className="w-full h-full object-cover"
+                />
               </div>
               {connectedNetworks.has('google') ? (
                 <Badge className="gap-1 bg-accent/20 border-accent text-accent hover:bg-accent/30 animate-pulse-slow">
@@ -121,8 +129,12 @@ export function ConnectionSetup() {
           <div className="absolute inset-0 bg-gradient-to-br from-chart-3/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <CardHeader className="relative">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex size-16 items-center justify-center rounded-xl bg-chart-3/10 border-2 border-chart-3/30 group-hover:border-chart-3/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-chart-3/40">
-                <span className="text-3xl font-black text-chart-3">M</span>
+              <div className="flex size-24 items-center justify-center rounded-xl bg-chart-3/10 border-2 border-chart-3/30 group-hover:border-chart-3/60 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-chart-3/40 overflow-hidden">
+                <img 
+                  src="/microsoft-logo.jpg" 
+                  alt="Microsoft"
+                  className="w-full h-full object-cover"
+                />
               </div>
               {connectedNetworks.has('microsoft') ? (
                 <Badge className="gap-1 bg-accent/20 border-accent text-accent hover:bg-accent/30 animate-pulse-slow">
