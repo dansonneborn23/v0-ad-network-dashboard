@@ -35,6 +35,12 @@ export function AdNetworkDashboard() {
       {/* Main Content */}
       <main className="flex-1">
         <div className="container px-6 py-8">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">
+              Fluency Technical Discovery
+            </h2>
+          </div>
+          
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full max-w-2xl grid-cols-4 bg-muted">
               <TabsTrigger value="setup" className="gap-2">
