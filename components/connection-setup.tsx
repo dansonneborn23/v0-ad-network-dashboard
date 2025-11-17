@@ -122,7 +122,7 @@ export function ConnectionSetup() {
             </Button>
             <Button 
               variant="outline"
-              className={`w-full border-2 border-${color}/30 hover:bg-${color}/10 hover:border-${color}/60 font-bold uppercase tracking-wider transition-all duration-300`}
+              className="w-full border-2 border-muted-foreground/30 text-foreground font-bold uppercase tracking-wider hover:bg-muted/20"
               onClick={() => handleConnect(network as NetworkType, 'api')}
             >
               <Key className="mr-2 size-4" />

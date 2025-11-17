@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -47,6 +47,13 @@ export function OAuthModal({ network, open, onClose, onComplete }: OAuthModalPro
   const scopes = network ? networkScopes[network] : []
   const networkName = network ? network.charAt(0).toUpperCase() + network.slice(1) : ''
   const color = network ? networkColors[network] : 'primary'
+
+  useEffect(() => {
+    if (open && network) {
+      const allScopeIds = networkScopes[network].map(scope => scope.id)
+      setSelectedScopes(new Set(allScopeIds))
+    }
+  }, [open, network])
 
   const handleScopeToggle = (scopeId: string) => {
     setSelectedScopes(prev => {
@@ -150,7 +157,7 @@ export function OAuthModal({ network, open, onClose, onComplete }: OAuthModalPro
           </Button>
           <Button
             onClick={handleAuthorize}
-            disabled={selectedScopes.size === 0 || isAuthenticating}
+            disabled={isAuthenticating}
             className={`flex-1 bg-${color} hover:bg-${color}/90 font-bold uppercase tracking-wider shadow-lg`}
           >
             {isAuthenticating ? (

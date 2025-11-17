@@ -25,9 +25,8 @@ const networkColors = {
 
 const credentialFields = {
   meta: [
-    { id: 'app_id', label: 'App ID', type: 'text', placeholder: 'Enter your Meta App ID' },
-    { id: 'app_secret', label: 'App Secret', type: 'password', placeholder: 'Enter your App Secret' },
     { id: 'access_token', label: 'Access Token', type: 'textarea', placeholder: 'Paste your long-lived access token' },
+    { id: 'business_id', label: 'Business ID', type: 'text', placeholder: 'Enter your Business Manager ID' },
   ],
   google: [
     { id: 'client_id', label: 'Client ID', type: 'text', placeholder: 'Enter your Google Ads Client ID' },
