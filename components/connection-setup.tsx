@@ -4,10 +4,12 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Circle, Zap, Shield, X, Plus } from 'lucide-react'
+import { Circle, Zap, Shield, X, Plus, Key } from 'lucide-react'
 import { OAuthModal } from "./oauth-modal"
+import { ApiCredentialsModal } from "./api-credentials-modal"
 
 type NetworkType = 'meta' | 'google' | 'microsoft' | null
+type ConnectionMethod = 'oauth' | 'api' | null
 
 interface ConnectedAccount {
   id: string
@@ -17,10 +19,12 @@ interface ConnectedAccount {
 
 export function ConnectionSetup() {
   const [selectedNetwork, setSelectedNetwork] = useState<NetworkType>(null)
+  const [connectionMethod, setConnectionMethod] = useState<ConnectionMethod>(null)
   const [connectedAccounts, setConnectedAccounts] = useState<ConnectedAccount[]>([])
 
-  const handleConnect = (network: NetworkType) => {
+  const handleConnect = (network: NetworkType, method: ConnectionMethod) => {
     setSelectedNetwork(network)
+    setConnectionMethod(method)
   }
 
   const handleOAuthComplete = (network: string) => {
@@ -31,10 +35,27 @@ export function ConnectionSetup() {
     }
     setConnectedAccounts(prev => [...prev, newAccount])
     setSelectedNetwork(null)
+    setConnectionMethod(null)
+  }
+
+  const handleApiComplete = (network: string) => {
+    const newAccount: ConnectedAccount = {
+      id: `${network}-api-${Date.now()}`,
+      name: `${network.charAt(0).toUpperCase() + network.slice(1)} Account ${connectedAccounts.filter(a => a.network === network).length + 1} (API)`,
+      network: network
+    }
+    setConnectedAccounts(prev => [...prev, newAccount])
+    setSelectedNetwork(null)
+    setConnectionMethod(null)
   }
 
   const handleDisconnect = (accountId: string) => {
     setConnectedAccounts(prev => prev.filter(account => account.id !== accountId))
+  }
+
+  const handleCloseModal = () => {
+    setSelectedNetwork(null)
+    setConnectionMethod(null)
   }
 
   const getNetworkAccounts = (network: string) => {
@@ -87,17 +108,25 @@ export function ConnectionSetup() {
               {description}
             </CardDescription>
           </CardHeader>
-          <CardContent className="relative space-y-4">
+          <CardContent className="relative space-y-3">
             <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
               <Shield className={`size-4 text-${color}`} />
               <span>READ-ONLY ACCESS</span>
             </div>
             <Button 
               className={`w-full bg-${color} hover:bg-${color}/90 ${color === 'chart-3' ? 'text-black' : 'text-primary-foreground'} font-bold uppercase tracking-wider shadow-lg shadow-${color}/30 hover:shadow-xl hover:shadow-${color}/40 transition-all duration-300 group`}
-              onClick={() => handleConnect(network as NetworkType)}
+              onClick={() => handleConnect(network as NetworkType, 'oauth')}
             >
               <Zap className="mr-2 size-4 group-hover:animate-pulse" />
-              CONNECT
+              OAUTH CONNECT
+            </Button>
+            <Button 
+              variant="outline"
+              className={`w-full border-2 border-${color}/30 hover:bg-${color}/10 hover:border-${color}/60 font-bold uppercase tracking-wider transition-all duration-300`}
+              onClick={() => handleConnect(network as NetworkType, 'api')}
+            >
+              <Key className="mr-2 size-4" />
+              USE API CREDENTIALS
             </Button>
           </CardContent>
         </Card>
@@ -125,15 +154,26 @@ export function ConnectionSetup() {
                 </CardContent>
               </Card>
             ))}
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full border-dashed border-muted-foreground/30 hover:border-accent hover:bg-accent/10"
-              onClick={() => handleConnect(network as NetworkType)}
-            >
-              <Plus className="mr-2 size-4" />
-              Connect Another Account
-            </Button>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-dashed border-muted-foreground/30 hover:border-accent hover:bg-accent/10"
+                onClick={() => handleConnect(network as NetworkType, 'oauth')}
+              >
+                <Zap className="mr-1 size-3" />
+                OAuth
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-dashed border-muted-foreground/30 hover:border-accent hover:bg-accent/10"
+                onClick={() => handleConnect(network as NetworkType, 'api')}
+              >
+                <Key className="mr-1 size-3" />
+                API
+              </Button>
+            </div>
           </div>
         )}
       </div>
@@ -182,9 +222,16 @@ export function ConnectionSetup() {
 
       <OAuthModal 
         network={selectedNetwork}
-        open={selectedNetwork !== null}
-        onClose={() => setSelectedNetwork(null)}
+        open={selectedNetwork !== null && connectionMethod === 'oauth'}
+        onClose={handleCloseModal}
         onComplete={handleOAuthComplete}
+      />
+
+      <ApiCredentialsModal
+        network={selectedNetwork}
+        open={selectedNetwork !== null && connectionMethod === 'api'}
+        onClose={handleCloseModal}
+        onComplete={handleApiComplete}
       />
     </div>
   )

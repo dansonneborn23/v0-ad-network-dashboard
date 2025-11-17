@@ -6,7 +6,8 @@ import { ConnectionSetup } from "@/components/connection-setup"
 import { MetaDashboard } from "@/components/meta-dashboard"
 import { GoogleDashboard } from "@/components/google-dashboard"
 import { MicrosoftDashboard } from "@/components/microsoft-dashboard"
-import { Settings, BarChart3 } from 'lucide-react'
+import { Settings } from 'lucide-react'
+import Image from 'next/image'
 
 export function AdNetworkDashboard() {
   const [activeTab, setActiveTab] = useState("setup")
@@ -17,16 +18,19 @@ export function AdNetworkDashboard() {
       <header className="border-b border-border bg-card">
         <div className="container flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
-              <BarChart3 className="size-5 text-primary-foreground" />
+            <div className="flex h-10 items-center justify-center">
+              <Image 
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fluency_Logo_Stacked_1200x300_1-Sr8IjJnrqsc97vWglKP8jwUZcVNtqO.png" 
+                alt="Fluency" 
+                width={160} 
+                height={40}
+                className="object-contain"
+              />
             </div>
-            <h1 className="text-lg font-semibold text-foreground">
-              Ad Network Dashboard
-            </h1>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              Multi-Network Analytics
+              Environment Discovery
             </span>
           </div>
         </div>
@@ -35,11 +39,6 @@ export function AdNetworkDashboard() {
       {/* Main Content */}
       <main className="flex-1">
         <div className="container px-6 py-8">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">
-              Fluency Technical Discovery
-            </h2>
-          </div>
           
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full max-w-2xl grid-cols-4 bg-muted">
